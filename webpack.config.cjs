@@ -1,14 +1,17 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
+const GenerateJsonPlugin = require('generate-json-webpack-plugin');
 const path = require('path');
+const manifest = require('./manifest.cjs');
 
 module.exports = {
-  mode: 'production',
   target: 'web',
   entry: {
     contentScript: './src/content/index.ts',
     background: './src/background/index.ts',
-    popup: './src/react/index.tsx',
+    popup: './src/popup/PopupIndex.tsx',
+    options: './src/options/OptionsIndex.tsx',
+    sidePanel: './src/side-panel/SidePanelIndex.tsx',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -17,17 +20,21 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './src/popup/popup.html',
       filename: 'popup.html',
+      chunks: ['popup', 'contentScript', 'background'],
     }),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: path.resolve('manifest.json'),
-          to: path.resolve('dist'),
-        },
-      ],
+    new HtmlWebpackPlugin({
+      template: './src/options/options.html',
+      filename: 'options.html',
+      chunks: ['options', 'contentScript', 'background'],
     }),
+    new HtmlWebpackPlugin({
+      template: './src/side-panel/side-panel.html',
+      filename: 'side-panel.html',
+      chunks: ['sidePanel', 'contentScript', 'background'],
+    }),
+    new GenerateJsonPlugin('manifest.json', manifest),
   ],
   module: {
     rules: [
