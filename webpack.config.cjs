@@ -7,11 +7,11 @@ const manifest = require('./manifest.cjs');
 module.exports = {
   target: 'web',
   entry: {
-    contentScript: './src/content/index.ts',
-    background: './src/background/index.ts',
-    popup: './src/popup/PopupIndex.tsx',
-    options: './src/options/OptionsIndex.tsx',
-    sidePanel: './src/side-panel/SidePanelIndex.tsx',
+    contentScript: './src/app/content/index.ts',
+    background: './src/app/background/index.ts',
+    popup: './src/app/popup/PopupIndex.tsx',
+    options: './src/app/options/OptionsIndex.tsx',
+    sidePanel: './src/app/side-panel/SidePanelIndex.tsx',
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -20,17 +20,17 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/popup/popup.html',
+      template: './src/app/popup/popup.html',
       filename: 'popup.html',
       chunks: ['popup', 'contentScript', 'background'],
     }),
     new HtmlWebpackPlugin({
-      template: './src/options/options.html',
+      template: './src/app/options/options.html',
       filename: 'options.html',
       chunks: ['options', 'contentScript', 'background'],
     }),
     new HtmlWebpackPlugin({
-      template: './src/side-panel/side-panel.html',
+      template: './src/app/side-panel/side-panel.html',
       filename: 'side-panel.html',
       chunks: ['sidePanel', 'contentScript', 'background'],
     }),
