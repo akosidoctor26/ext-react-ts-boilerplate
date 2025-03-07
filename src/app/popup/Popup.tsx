@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import React from 'react';
 
 const Popup = () => {
@@ -20,8 +21,8 @@ const Popup = () => {
   };
 
   return (
-    <main>
-      <button onClick={onClick}>Say Hello</button>
+    <main className="w-[500px] h-[500px]">
+      <Button onClick={onClick}>Say Hello</Button>
       <button onClick={openSidePanel}>Open Side Panel</button>
     </main>
   );

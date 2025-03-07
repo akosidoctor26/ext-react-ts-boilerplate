@@ -35,6 +35,14 @@ module.exports = {
       chunks: ['sidePanel', 'contentScript', 'background'],
     }),
     new GenerateJsonPlugin('manifest.json', manifest),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve('./src/global.css'),
+          to: path.resolve('dist'),
+        },
+      ],
+    }),
   ],
   module: {
     rules: [
@@ -55,6 +63,9 @@ module.exports = {
     ],
   },
   resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.css', '.scss'],
   },
 };
