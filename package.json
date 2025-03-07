@@ -24,7 +24,7 @@
   },
   "contributors": [],
   "scripts": {
-    "build-dev": "webpack --config webpack.config.cjs --mode development --no-devtool",
+    "build-dev": "webpack --config webpack.config.cjs --mode development --no-devtool --watch",
     "build-prod": "webpack --config webpack.config.cjs --mode production"
   },
   "devDependencies": {
