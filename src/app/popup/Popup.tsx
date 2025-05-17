@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './popup.css';
+
 const Popup = () => {
   const onClick = async () => {
     const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -21,7 +23,9 @@ const Popup = () => {
 
   return (
     <main>
-      <button onClick={onClick}>Say Hello</button>
+      <button className="btn" onClick={onClick}>
+        Say Hello
+      </button>
       <button onClick={openSidePanel}>Open Side Panel</button>
     </main>
   );
